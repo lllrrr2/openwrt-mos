@@ -5,7 +5,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mosdns
-PKG_VERSION:=a281fdb
+PKG_VERSION:=525c394
 PKG_RELEASE:=$(AUTORELEASE)
 
 PKG_SOURCE:=mosdns-$(PKG_VERSION).tar.gz
@@ -63,11 +63,9 @@ define Build/Prepare
 	$(call Build/Prepare/Default)
 endef
 
-GO_PKG_TARGET_VARS:=$(filter-out CGO_ENABLED=%,$(GO_PKG_TARGET_VARS)) CGO_ENABLED=0
-
 define Build/UpdateDependencies
 	cd $(PKG_BUILD_DIR) && \
-		go get -u && \
+		go get -u=patch && \
 		go mod tidy
 endef
 
